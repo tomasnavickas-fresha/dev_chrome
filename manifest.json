@@ -1,13 +1,19 @@
 {
   "manifest_version": 3,
-  "name": "Feedr Price Sorter",
-  "version": "1.0",
-  "description": "Sorts food items by price and highlights expensive ones on Feedr",
+  "name": "Feedr & Jira Helper",
+  "version": "1.1",
+  "description": "Sorts food items on Feedr and adds copy buttons to Jira tickets",
   "content_scripts": [
     {
       "matches": ["https://feedr.co/*"],
       "js": ["content.js"],
       "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://shedul.atlassian.net/*"],
+      "js": ["jira.js"],
+      "run_at": "document_idle"
     }
-  ]
+  ],
+  "permissions": ["clipboardWrite"]
 }

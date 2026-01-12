@@ -16,25 +16,39 @@
     // Inject Styles for a native "Subtle" button look
     const style = document.createElement('style');
     style.innerHTML = `
+        [data-testid="platform-board-kit.ui.card.card"] {
+            position: relative;
+        }
+        .gh-btn-wrapper {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            display: flex;
+            gap: 2px;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.15s;
+        }
+        [data-testid="platform-board-kit.ui.card.card"]:hover .gh-btn-wrapper {
+            opacity: 1;
+        }
         .gh-copy-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            background: transparent;
+            background: white;
             border: 1px solid #DFE1E6;
             border-radius: 3px;
-            padding: 4px 8px;
-            margin-left: 6px;
+            padding: 4px;
             cursor: pointer;
             color: #42526E;
             font-size: 11px;
             font-weight: 500;
             transition: background 0.1s;
-            vertical-align: middle;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
         .gh-copy-btn:hover {
-            background: rgba(9, 30, 66, 0.08);
+            background: #E4E6EB;
             color: #0052CC;
         }
         .gh-copy-btn.success {
@@ -65,7 +79,7 @@
                 btn.onclick = (e) => {
                     e.stopPropagation();
                     navigator.clipboard.writeText(prTitle).then(() => {
-                        btn.innerHTML = `${CHECK_ICON} Copied!`;
+                        btn.innerHTML = CHECK_ICON;
                         btn.classList.add('success');
                         setTimeout(() => {
                             btn.innerHTML = COPY_ICON;
@@ -84,7 +98,7 @@
                 branchBtn.onclick = (e) => {
                     e.stopPropagation();
                     navigator.clipboard.writeText(branchName).then(() => {
-                        branchBtn.innerHTML = `${CHECK_ICON} Copied!`;
+                        branchBtn.innerHTML = CHECK_ICON;
                         branchBtn.classList.add('success');
                         setTimeout(() => {
                             branchBtn.innerHTML = BRANCH_ICON;
@@ -93,9 +107,12 @@
                     });
                 };
 
-                // Append next to the Ticket Key (e.g. B2C-1234)
-                keyContainer.parentElement.appendChild(btn);
-                keyContainer.parentElement.appendChild(branchBtn);
+                // Wrap buttons in container, position absolutely on card
+                const wrapper = document.createElement('div');
+                wrapper.className = 'gh-btn-wrapper';
+                wrapper.appendChild(btn);
+                wrapper.appendChild(branchBtn);
+                card.appendChild(wrapper);
             }
         });
     };

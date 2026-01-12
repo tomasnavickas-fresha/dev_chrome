@@ -60,7 +60,7 @@
                 const btn = document.createElement('button');
                 btn.className = 'gh-copy-btn';
                 btn.setAttribute('title', 'Copy PR Title');
-                btn.innerHTML = `${COPY_ICON} Copy Title`;
+                btn.innerHTML = COPY_ICON;
 
                 btn.onclick = (e) => {
                     e.stopPropagation();
@@ -68,7 +68,7 @@
                         btn.innerHTML = `${CHECK_ICON} Copied!`;
                         btn.classList.add('success');
                         setTimeout(() => {
-                            btn.innerHTML = `${COPY_ICON} Copy Title`;
+                            btn.innerHTML = COPY_ICON;
                             btn.classList.remove('success');
                         }, 1500);
                     });
@@ -79,7 +79,7 @@
                 const branchBtn = document.createElement('button');
                 branchBtn.className = 'gh-copy-btn gh-branch-btn';
                 branchBtn.setAttribute('title', 'Copy Branch Name');
-                branchBtn.innerHTML = `${BRANCH_ICON} Branch`;
+                branchBtn.innerHTML = BRANCH_ICON;
 
                 branchBtn.onclick = (e) => {
                     e.stopPropagation();
@@ -87,7 +87,7 @@
                         branchBtn.innerHTML = `${CHECK_ICON} Copied!`;
                         branchBtn.classList.add('success');
                         setTimeout(() => {
-                            branchBtn.innerHTML = `${BRANCH_ICON} Branch`;
+                            branchBtn.innerHTML = BRANCH_ICON;
                             branchBtn.classList.remove('success');
                         }, 1500);
                     });

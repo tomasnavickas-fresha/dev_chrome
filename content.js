@@ -58,3 +58,19 @@ function runWithRetry(attempts = 10, delay = 500) {
 
 // Start the script
 runWithRetry();
+
+// Watch for DOM changes (e.g., when navigating to different categories)
+let debounceTimer;
+const observer = new MutationObserver(() => {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    sortAndHighlightItems();
+  }, 300);
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
+
+// Periodic refresh every 5 seconds (works on Brave where MutationObserver may not trigger)
+setInterval(() => {
+  sortAndHighlightItems();
+}, 5000);
